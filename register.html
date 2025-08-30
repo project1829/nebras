@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>إنشاء حساب - نبراس العلم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <link href="css/styles.css" rel="stylesheet"/>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#1A3D6C',
+              secondary: '#D4A03C',
+              'base-bg': '#F5F1E9',
+              'comp-bg': '#FFFFFF',
+              'text-main': '#2C2C2C',
+              'text-secondary': '#6B7280',
+              success: '#10B981',
+              error: '#EF4444',
+            },
+            fontFamily: {
+              sans: ['IBM Plex Sans Arabic', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-base-bg font-sans flex items-center justify-center min-h-screen p-4">
+    <!-- تم تصميم هذه الصفحة بالفعل لتكون متجاوبة بشكل جيد باستخدام Tailwind CSS classes مثل max-w-md و w-full و p-4 و sm:p-10. -->
+    <div class="w-full max-w-md mx-auto">
+        <div class="bg-comp-bg p-8 sm:p-10 rounded-2xl shadow-2xl">
+            <div class="text-center mb-8">
+                <a href="index.html" class="inline-block mb-6">
+                    <img src="images/logo.svg" alt="شعار نبراس العلم" class="h-14 w-auto mx-auto">
+                </a>
+                <h2 class="text-3xl font-bold text-primary">إنشاء حساب جديد</h2>
+                <p class="text-text-secondary mt-2">انضم لمجتمعنا وابدأ رحلتك</p>
+            </div>
+            
+            <div id="form-error-generic" class="hidden bg-error/10 text-error text-center p-3 rounded-lg mb-4 text-sm"></div>
+            <div id="form-success-message" class="hidden bg-success/10 text-success text-center p-3 rounded-lg mb-4 text-sm"></div>
+
+            <form id="register-form" novalidate="" class="space-y-5">
+                <div>
+                     <div class="relative">
+                        <div class="input-icon"><i data-lucide="user" class="w-5 h-5"></i></div>
+                        <input id="name" name="name" placeholder="الاسم الكامل" required="" type="text" class="w-full px-4 py-3 pr-4 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary/50 focus:border-secondary outline-none transition duration-200 bg-gray-50"/>
+                    </div>
+                    <p id="name-error" class="text-error text-xs mt-1"></p>
+                </div>
+                <div>
+                    <div class="relative">
+                        <div class="input-icon"><i data-lucide="mail" class="w-5 h-5"></i></div>
+                        <input id="email" name="email" placeholder="البريد الإلكتروني الجامعي" required="" type="email" class="w-full px-4 py-3 pr-4 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary/50 focus:border-secondary outline-none transition duration-200 bg-gray-50"/>
+                    </div>
+                    <p id="email-error" class="text-error text-xs mt-1"></p>
+                </div>
+                <div>
+                    <div class="relative">
+                        <div class="input-icon"><i data-lucide="lock" class="w-5 h-5"></i></div>
+                        <input id="password" name="password" placeholder="كلمة المرور" required="" type="password" class="w-full px-4 py-3 pr-4 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary/50 focus:border-secondary outline-none transition duration-200 bg-gray-50"/>
+                    </div>
+                    <p id="password-error" class="text-error text-xs mt-1"></p>
+                </div>
+                <div>
+                    <div class="relative">
+                        <div class="input-icon"><i data-lucide="shield-check" class="w-5 h-5"></i></div>
+                        <input id="password_confirmation" name="password_confirmation" placeholder="تأكيد كلمة المرور" required="" type="password" class="w-full px-4 py-3 pr-4 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary/50 focus:border-secondary outline-none transition duration-200 bg-gray-50"/>
+                    </div>
+                    <p id="password_confirmation-error" class="text-error text-xs mt-1"></p>
+                </div>
+                <div class="pt-2">
+                    <button type="submit" id="register-submit-button" class="w-full bg-secondary text-white font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-secondary/40 flex items-center justify-center">
+                        إنشاء الحساب
+                    </button>
+                </div>
+            </form>
+            <p class="text-center text-sm text-text-secondary mt-8">
+                لديك حساب بالفعل؟
+                <a href="login.html" class="font-bold text-primary hover:underline">
+                    سجل دخولك
+                </a>
+            </p>
+        </div>
+    </div>
+    <script>
+        lucide.createIcons();
+    </script>
+    <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
+
+

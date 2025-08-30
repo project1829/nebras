@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>نبراس العلم - الملف الشخصي</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'nabras-blue': '#1A365D',
+                        'nabras-gold': '#D69E2E',
+                        'nabras-light': '#F7FAFC',
+                        'nabras-gray': '#4A5568'
+                    },
+                    fontFamily: {
+                        'cairo': ['Cairo', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body id="page-profile" class="font-cairo bg-nabras-light">
+    <header class="bg-white shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="home.html" class="flex items-center space-x-2 space-x-reverse">
+                <img src="images/logo.png" alt="نبراس العلم" class="h-10 w-10">
+                <span class="text-xl font-bold text-nabras-blue">نبراس العلم</span>
+            </a>
+            <!-- زر العودة - تم تحسينه ليكون متجاوبًا -->
+            <a href="home.html" class="text-nabras-gold hover:text-yellow-600 transition-colors p-2 rounded-md md:p-0">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <!-- قسم معلومات الملف الشخصي - تم تحسين التجاوبية -->
+                <div class="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 md:space-x-reverse text-center md:text-right">
+                    <div class="w-24 h-24 bg-nabras-gold rounded-full flex items-center justify-center flex-shrink-0">
+                        <span class="text-white font-bold text-4xl">ف</span>
+                    </div>
+                    <div class="flex-1">
+                        <h1 id="profile-name" class="text-2xl sm:text-3xl font-bold text-nabras-blue mb-2">فجر يوسف أحمد الزهراني</h1>
+                        <p id="profile-email" class="text-nabras-gray mb-4 text-sm sm:text-base">s444021521@university.edu.sa</p>
+                        <button class="bg-nabras-gold text-white px-6 py-2 rounded-lg hover:bg-yellow-600 transition-colors font-semibold text-sm sm:text-base">تعديل الملف الشخصي</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="border-b border-gray-200">
+                    <!-- أزرار التبويبات - تم تحسين التجاوبية -->
+                    <nav aria-label="Tabs" class="flex flex-col sm:flex-row">
+                        <button data-tab-target="#books-tab" class="tab-button active flex-1 py-4 px-6 text-center font-medium border-b-2 border-nabras-gold text-nabras-gold text-sm sm:text-base">الكتب المعروضة</button>
+                        <button data-tab-target="#sales-tab" class="tab-button flex-1 py-4 px-6 text-center font-medium border-b-2 border-transparent text-nabras-gray hover:text-nabras-blue transition-colors text-sm sm:text-base">مبيعاتي</button>
+                        <button data-tab-target="#purchases-tab" class="tab-button flex-1 py-4 px-6 text-center font-medium border-b-2 border-transparent text-nabras-gray hover:text-nabras-blue transition-colors text-sm sm:text-base">مشترياتي</button>
+                    </nav>
+                </div>
+
+                <div class="p-6">
+                    <div id="books-tab" class="tab-content">
+                        <!-- شبكة عرض الكتب - تم تحسين التجاوبية -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="card hover-lift">
+                                <div class="relative">
+                                    <div class="w-full h-40 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg mb-4 flex items-center justify-center">
+                                        <svg class="w-12 h-12 text-nabras-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">متوفر</div>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-nabras-blue mb-2 text-base sm:text-lg">مقدمة في الذكاء الاصطناعي</h3>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-base sm:text-lg font-bold text-nabras-gold">55.00 ر.س</span>
+                                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">جيد</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sales-tab" class="tab-content hidden">
+                        <div class="text-center py-12">
+                            <svg class="w-16 h-16 text-nabras-gray mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                            </svg>
+                            <h3 class="text-xl font-semibold text-nabras-gray mb-2">لا يوجد مبيعات مكتملة بعد.</h3>
+                            <p class="text-nabras-gray">ستظهر مبيعاتك المكتملة هنا</p>
+                        </div>
+                    </div>
+
+                    <div id="purchases-tab" class="tab-content hidden">
+                        <div class="text-center py-12">
+                            <svg class="w-16 h-16 text-nabras-gray mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5L2 21m5-8v8a2 2 0 002 2h6a2 2 0 002-2v-8"></path>
+                            </svg>
+                            <h3 class="text-xl font-semibold text-nabras-gray mb-2">لا يوجد مشتريات مكتملة بعد.</h3>
+                            <p class="text-nabras-gray">ستظهر مشترياتك المكتملة هنا</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab-target');
+
+                    // Remove active class from all buttons
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active', 'border-nabras-gold', 'text-nabras-gold');
+                        btn.classList.add('border-transparent', 'text-nabras-gray');
+                    });
+
+                    // Add active class to clicked button
+                    this.classList.add('active', 'border-nabras-gold', 'text-nabras-gold');
+                    this.classList.remove('border-transparent', 'text-nabras-gray');
+
+                    // Hide all tab contents
+                    tabContents.forEach(content => {
+                        content.classList.add('hidden');
+                    });
+
+                    // Show target tab content
+                    document.querySelector(targetTab).classList.remove('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>نبراس العلم - المحادثات</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'nabras-blue': '#1A365D',
+                        'nabras-gold': '#D69E2E',
+                        'nabras-light': '#F7FAFC',
+                        'nabras-gray': '#4A5568'
+                    },
+                    fontFamily: {
+                        'cairo': ['Cairo', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* تحسين تصميم المحادثة النشطة */
+        .conversation-item.active {
+            background-color: #f7fafc;
+            border-right: 3px solid #D69E2E;
+        }
+        .conversation-item.active p, 
+        .conversation-item.active span {
+             font-weight: 600;
+        }
+
+        /* تحسين overlay للجوال */
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* تحسين الشريط الجانبي للمحادثات */
+        .conversations-sidebar {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .conversations-sidebar.open {
+            transform: translateX(0);
+        }
+
+        /* ضمان ارتفاع كامل للشاشة */
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="font-cairo bg-nabras-light h-full flex flex-col">
+    <!-- Header متجاوب محسن -->
+    <header class="bg-white shadow-lg flex-shrink-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="home.html" class="flex items-center space-x-2 space-x-reverse">
+                <img src="images/logo.png" alt="نبراس العلم" class="h-8 w-8 md:h-10 md:w-10">
+                <span class="text-lg md:text-xl font-bold text-nabras-blue">نبراس العلم</span>
+            </a>
+            
+            <!-- أزرار التنقل للشاشات الكبيرة -->
+            <div class="hidden md:flex items-center space-x-4 space-x-reverse">
+                <a href="home.html" class="text-nabras-gray hover:text-nabras-blue transition-colors p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                </a>
+                <a href="chat.html" class="text-nabras-gold p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                </a>
+                <a href="profile.html" class="w-8 h-8 bg-nabras-gold rounded-full flex items-center justify-center">
+                    <span class="text-white font-semibold text-sm">أ</span>
+                </a>
+            </div>
+
+            <!-- أزرار الجوال -->
+            <div class="md:hidden flex items-center space-x-2 space-x-reverse">
+                <button id="mobile-conversations-toggle" class="text-nabras-blue p-2 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                </button>
+                <a href="home.html" class="text-nabras-gray p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="flex-1 flex overflow-hidden">
+        <!-- Overlay للجوال -->
+        <div id="mobile-overlay" class="mobile-overlay"></div>
+
+        <!-- الشريط الجانبي للمحادثات - تم إعادة تصميمه بالكامل ليكون متجاوبًا -->
+        <aside id="conversations-sidebar" class="conversations-sidebar fixed md:relative inset-y-0 right-0 w-80 md:w-96 bg-white border-l border-gray-200 flex flex-col z-50 md:transform-none">
+            <div class="p-4 border-b border-gray-200 flex items-center justify-between">
+                <div class="flex items-center space-x-2 space-x-reverse">
+                    <h2 class="text-lg font-semibold text-nabras-blue">المحادثات النشطة</h2>
+                    <span id="conversations-count" class="bg-nabras-gold text-white text-xs font-bold px-2 py-1 rounded-full">4</span>
+                </div>
+                <!-- زر إغلاق للجوال -->
+                <button id="close-conversations" class="md:hidden text-nabras-gray hover:text-nabras-blue focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <ul id="conversations-list" class="flex-1 overflow-y-auto">
+                <!-- سيتم ملء المحادثات ديناميكياً -->
+            </ul>
+        </aside>
+
+        <!-- قسم الرسائل الرئيسي - تم إعادة تصميمه بالكامل -->
+        <section class="flex-1 flex flex-col bg-white">
+            <!-- معلومات الكتاب والإجراءات -->
+            <div class="p-4 border-b border-gray-200 bg-nabras-light flex-shrink-0">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+                    <div class="flex items-center space-x-3 space-x-reverse">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-nabras-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-nabras-blue text-base md:text-lg">أساسيات الذكاء الاصطناعي</h3>
+                            <p class="text-sm text-nabras-gray">الحالة: <span class="text-green-600 font-medium">متوفر</span></p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 sm:space-x-reverse">
+                        <button class="bg-nabras-gold text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors text-sm font-semibold">
+                            إرسال طلب حجز
+                        </button>
+                        <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors text-sm font-semibold">
+                            قبول الحجز
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- منطقة الرسائل -->
+            <div id="messages-container" class="flex-1 overflow-y-auto p-4 space-y-4">
+                <div class="flex items-start space-x-2 space-x-reverse">
+                    <div class="w-8 h-8 bg-nabras-gold rounded-full flex items-center justify-center flex-shrink-0">
+                        <span class="text-white text-xs font-semibold">ف</span>
+                    </div>
+                    <div class="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+                        <div class="bg-gray-100 rounded-lg p-3">
+                            <p class="text-sm text-nabras-gray">مرحباً، هل كتاب الذكاء الاصطناعي ما زال متوفراً؟</p>
+                        </div>
+                        <p class="text-xs text-nabras-gray mt-1">منذ 10 دقائق</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-2 space-x-reverse justify-end">
+                    <div class="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+                        <div class="bg-nabras-gold rounded-lg p-3">
+                            <p class="text-sm text-white">نعم، الكتاب متوفر. هل تريدين معرفة المزيد من التفاصيل؟</p>
+                        </div>
+                        <p class="text-xs text-nabras-gray mt-1 text-left">منذ 8 دقائق</p>
+                    </div>
+                    <div class="w-8 h-8 bg-nabras-blue rounded-full flex items-center justify-center flex-shrink-0">
+                        <span class="text-white text-xs font-semibold">أ</span>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-2 space-x-reverse">
+                    <div class="w-8 h-8 bg-nabras-gold rounded-full flex items-center justify-center flex-shrink-0">
+                        <span class="text-white text-xs font-semibold">ف</span>
+                    </div>
+                    <div class="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+                        <div class="bg-gray-100 rounded-lg p-3">
+                            <p class="text-sm text-nabras-gray">ممتاز! هل يمكنني رؤية صور إضافية للكتاب؟</p>
+                        </div>
+                        <p class="text-xs text-nabras-gray mt-1">منذ 5 دقائق</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- منطقة إدخال الرسائل -->
+            <div class="p-4 border-t border-gray-200 bg-white flex-shrink-0">
+                <div class="flex items-center space-x-2 space-x-reverse">
+                    <div class="flex-1 relative">
+                        <input 
+                            id="chat-input" 
+                            placeholder="اكتب رسالتك هنا..." 
+                            type="text" 
+                            class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-nabras-gold focus:border-nabras-gold text-sm md:text-base"
+                        />
+                        <button class="absolute left-2 top-1/2 transform -translate-y-1/2 text-nabras-gray hover:text-nabras-blue transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <button id="send-button" class="bg-nabras-gold text-white p-3 rounded-lg hover:bg-yellow-600 transition-colors flex-shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- بيانات المحادثات ---
+            const conversationsData = [
+                {
+                    id: 1,
+                    name: 'فجر يوسف أحمد الزهراني',
+                    studentId: '444021521',
+                    lastMessage: 'هل الكتاب ما زال متوفراً؟',
+                    timestamp: 'منذ 5 دقائق',
+                    initial: 'ف',
+                    unread: true,
+                    active: true
+                },
+                {
+                    id: 2,
+                    name: 'أثير صالح محمد الزهراني',
+                    studentId: '444019719',
+                    lastMessage: 'شكراً لك، سأتواصل معك غداً.',
+                    timestamp: 'منذ ساعة',
+                    initial: 'أ',
+                    unread: false,
+                    active: false
+                },
+                {
+                    id: 3,
+                    name: 'خلود بخيت عايض الغامدي',
+                    studentId: '444019501',
+                    lastMessage: 'تمام، تم استلام الكتاب.',
+                    timestamp: 'أمس',
+                    initial: 'خ',
+                    unread: false,
+                    active: false
+                },
+                {
+                    id: 4,
+                    name: 'تغريد سعيد الزهراني',
+                    studentId: '444019378',
+                    lastMessage: 'بخصوص كتاب الرياضيات...',
+                    timestamp: 'منذ يومين',
+                    initial: 'ت',
+                    unread: true,
+                    active: false
+                }
+            ];
+
+            // العناصر
+            const conversationsList = document.getElementById('conversations-list');
+            const conversationsCount = document.getElementById('conversations-count');
+            const conversationsSidebar = document.getElementById('conversations-sidebar');
+            const mobileConversationsToggle = document.getElementById('mobile-conversations-toggle');
+            const closeConversations = document.getElementById('close-conversations');
+            const mobileOverlay = document.getElementById('mobile-overlay');
+            const chatInput = document.getElementById('chat-input');
+            const sendButton = document.getElementById('send-button');
+            const messagesContainer = document.getElementById('messages-container');
+            
+            // --- إنشاء قائمة المحادثات ---
+            function renderConversations() {
+                conversationsList.innerHTML = '';
+                conversationsData.forEach(conv => {
+                    const conversationElement = `
+                        <li class="conversation-item border-b border-gray-100 hover:bg-gray-50 cursor-pointer transition-colors duration-200 ${conv.active ? 'active' : ''}" data-conversation-id="${conv.id}">
+                            <div class="p-4 flex items-center space-x-3 space-x-reverse">
+                                <div class="w-12 h-12 bg-nabras-blue rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-semibold text-lg">${conv.initial}</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <p class="text-sm font-medium text-nabras-blue truncate">${conv.name}</p>
+                                        <span class="text-xs text-nabras-gray flex-shrink-0">${conv.timestamp}</span>
+                                    </div>
+                                    <p class="text-xs text-nabras-gray truncate">${conv.lastMessage}</p>
+                                    <p class="text-xs text-nabras-gray truncate mt-1">${conv.studentId}</p>
+                                </div>
+                                ${conv.unread ? '<div class="w-2.5 h-2.5 bg-nabras-gold rounded-full self-center ml-2 flex-shrink-0"></div>' : ''}
+                            </div>
+                        </li>
+                    `;
+                    conversationsList.innerHTML += conversationElement;
+                });
+                conversationsCount.textContent = conversationsData.length;
+            }
+
+            // --- التعامل مع نقرات المحادثات ---
+            conversationsList.addEventListener('click', function(event) {
+                const clickedItem = event.target.closest('.conversation-item');
+                if (!clickedItem) return;
+
+                const conversationId = clickedItem.dataset.conversationId;
+
+                conversationsData.forEach(conv => conv.active = false);
+                const selectedConversation = conversationsData.find(conv => conv.id == conversationId);
+                if(selectedConversation) {
+                    selectedConversation.active = true;
+                }
+
+                renderConversations();
+
+                // إخفاء الشريط الجانبي في الجوال بعد اختيار محادثة
+                if (window.innerWidth < 768) {
+                    closeMobileConversations();
+                }
+            });
+
+            // --- وظائف الجوال ---
+            function openMobileConversations() {
+                conversationsSidebar.classList.add('open');
+                mobileOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMobileConversations() {
+                conversationsSidebar.classList.remove('open');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // أحداث الجوال
+            mobileConversationsToggle.addEventListener('click', openMobileConversations);
+            closeConversations.addEventListener('click', closeMobileConversations);
+            mobileOverlay.addEventListener('click', closeMobileConversations);
+
+            // --- وظائف الدردشة ---
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    const messageHTML = `
+                        <div class="flex items-start space-x-2 space-x-reverse justify-end">
+                            <div class="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+                                <div class="bg-nabras-gold rounded-lg p-3">
+                                    <p class="text-sm text-white">${message}</p>
+                                </div>
+                                <p class="text-xs text-nabras-gray mt-1 text-left">الآن</p>
+                            </div>
+                            <div class="w-8 h-8 bg-nabras-blue rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-white text-xs font-semibold">أ</span>
+                            </div>
+                        </div>`;
+                    messagesContainer.innerHTML += messageHTML;
+                    chatInput.value = '';
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }
+            }
+            
+            sendButton.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            // --- التعامل مع تغيير حجم الشاشة ---
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    // إظهار الشريط الجانبي على الشاشات الكبيرة
+                    conversationsSidebar.classList.remove('open');
+                    mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // --- التشغيل الأولي ---
+            renderConversations();
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        });
+    </script>
+</body>
+</html>
+

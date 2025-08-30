@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>الرئيسية - منصة نبراس العلم</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'nabras-blue': '#1A365D',
+                        'nabras-gold': '#D69E2E',
+                        'nabras-light': '#F7FAFC',
+                        'nabras-gray': '#4A5568'
+                    },
+                    fontFamily: {
+                        'cairo': ['Cairo']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body class="font-cairo bg-nabras-light text-nabras-gray leading-relaxed">
+    <header class="bg-white shadow-lg py-4 md:py-6">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2 space-x-reverse">
+                <img src="images/logo.svg" alt="نبراس العلم" class="h-10 w-10 md:h-12 md:w-12">
+                <h1 class="text-xl md:text-2xl font-bold text-nabras-blue">نبراس العلم</h1>
+            </a>
+            <!-- زر قائمة الجوال: تم إضافته لجعل التنقل متجاوبًا على الشاشات الصغيرة -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-nabras-blue focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- قائمة التنقل الرئيسية: تم تعديلها لتكون مخفية افتراضيًا على الجوال وتظهر عند النقر على زر القائمة، وتظهر دائمًا على الشاشات الكبيرة -->
+            <nav id="main-nav" class="hidden md:flex flex-col md:flex-row md:space-x-4 md:space-x-reverse md:items-center absolute md:relative top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none py-4 md:py-0 z-20">
+                <a href="login.html" class="btn-secondary block md:inline-block text-center md:text-right px-4 py-2 md:py-0">تسجيل الدخول</a>
+                <a href="register.html" class="btn-primary block md:inline-block text-center md:text-right px-4 py-2 md:py-0 mt-2 md:mt-0">إنشاء حساب</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        
+        <section class="relative bg-gradient-to-r from-nabras-blue to-blue-800 text-white min-h-[50vh] flex items-center justify-center overflow-hidden py-16 md:py-24">
+            <div class="absolute inset-0">
+                <img src="images/hero-banner.jpg" alt="" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-r from-nabras-blue/60 to-blue-800/60"></div>
+            </div>
+            <!-- قسم الـ Hero Section: تم تعديل أحجام الخطوط لتكون متجاوبة باستخدام sm:text- و md:text- -->
+            <div class="relative container mx-auto px-4 text-center z-10">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 md:mb-6 leading-tight fade-in-up">
+                    بيع، شراء وتبادل كتبك الجامعية بسهولة
+                </h2>
+                <p class="text-base sm:text-lg md:text-xl mb-6 md:mb-8 max-w-3xl mx-auto fade-in-up" style="animation-delay: 0.2s;">
+                    منصة نبراس العلم تربط طلاب الجامعات لتوفير المال وتعزيز الاستدامة، وتسهيل الوصول للمعرفة.
+                </p>
+                <a href="register.html" class="btn-primary inline-block fade-in-up" style="animation-delay: 0.4s;">ابدأ الآن مجاناً</a>
+            </div>
+        </section>
+
+              <section class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12 md:mb-16">
+                    <h3 class="text-3xl md:text-4xl font-bold text-nabras-blue mb-4">لماذا تختار نبراس العلم؟</h3>
+                    <p class="text-lg text-nabras-gray max-w-2xl mx-auto">نقدم لك تجربة فريدة ومميزة تجعل رحلتك التعليمية أكثر سهولة وفعالية.</p>
+                </div>
+                <!-- قسم الـ Feature Cards: تم تعديل تخطيط الشبكة ليكون متجاوبًا على أحجام الشاشات المختلفة (عمود واحد على الجوال، عمودين على الشاشات الصغيرة، وثلاثة أعمدة على الشاشات الكبيرة) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-xl font-semibold text-nabras-blue mb-2">توفير المال</h4>
+                        <p class="text-nabras-gray">احصل على كتبك الدراسية بأسعار مخفضة من زملائك، وبع كتبك التي لم تعد بحاجتها بسهولة ويسر.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-xl font-semibold text-nabras-blue mb-2">سهولة الاستخدام</h4>
+                        <p class="text-nabras-gray">واجهة بسيطة ونظيفة تمكنك من العثور على ما تحتاجه والتواصل مع البائعين خلال دقائق معدودة.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-xl font-semibold text-nabras-blue mb-2">مجتمع طلابي</h4>
+                        <p class="text-nabras-gray">انضم إلى مجتمع حيوي من الطلاب المتعاونين، وتبادل المعرفة والخبرات والموارد التعليمية القيمة.</p>
+                    </div>
+                </div>
+            </div>
+     
+        </section>
+    </main>
+
+    <footer class="bg-nabras-blue text-white py-8 md:py-10">
+        <div class="container mx-auto px-4">
+            <!-- الفوتر: تم تعديل تخطيط الفوتر ليكون متجاوبًا، حيث يتحول من صف واحد على الشاشات الكبيرة إلى عمود على الشاشات الصغيرة مع محاذاة النص في المنتصف -->
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-right">
+                <div class="mb-2 md:mb-0">
+                    <p class="text-sm">&copy; 2025 منصة نبراس العلم. جميع الحقوق محفوظة.</p>
+                </div>
+                <!-- يمكن إضافة روابط إضافية أو أيقونات وسائل التواصل الاجتماعي هنا -->
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // JavaScript لتشغيل قائمة الجوال
+        document.getElementById("mobile-menu-button").addEventListener("click", function() {
+            var nav = document.getElementById("main-nav");
+            if (nav.classList.contains("hidden")) {
+                nav.classList.remove("hidden");
+                nav.classList.add("flex");
+            } else {
+                nav.classList.remove("flex");
+                nav.classList.add("hidden");
+            }
+        });
+    </script>
+</body>
+</html>
+
+
