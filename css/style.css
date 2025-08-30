@@ -1,0 +1,100 @@
+/* --- Google Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+/* --- General Body Styles --- */
+body {
+    font-family: 'Cairo', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0; /* <-- السطر المضاف هنا */
+}
+
+/* --- Hero Section Banner --- */
+.hero-banner {
+    background-color: #1A365D; /* لون خلفية أساسي أنيق */
+    background-image: url('../images/hero-banner.jpg'); /* تأكد من أن مسار الصورة صحيح */
+    background-size: contain; /* يضمن ظهور الصورة كاملة العرض والطول */
+    background-position: center bottom; /* يثبت الصورة في المنتصف والأسفل */
+    background-repeat: no-repeat; /* يمنع تكرار الصورة */
+}
+
+/* --- Custom Button Styles --- */
+.btn-primary {
+    background-color: #D69E2E;
+    color: #1A365D;
+    font-weight: bold;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px 0 rgba(214, 158, 46, 0.39);
+}
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px 0 rgba(214, 158, 46, 0.5);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    border: 2px solid #D69E2E;
+    transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+    background-color: #D69E2E;
+    color: #1A365D;
+    transform: translateY(-3px);
+}
+/* For buttons in header */
+header .btn-secondary {
+    color: #1A365D;
+}
+header .btn-secondary:hover {
+    color: #FFF;
+    background-color: #1A365D;
+    border-color: #1A365D;
+}
+
+
+/* --- Feature Card Styles --- */
+.feature-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease-in-out;
+}
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+.feature-icon {
+    margin: 0 auto 1.5rem auto;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #1A365D, #2c5282);
+    box-shadow: 0 10px 15px -3px rgba(26, 54, 93, 0.3);
+}
+
+/* --- Animation --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
