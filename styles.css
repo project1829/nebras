@@ -1,0 +1,147 @@
+:root {
+    --nibras-blue: #0A2A43;
+    --nibras-gold: #D4AF37; 
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Global Styles & Variables --- */
+.text-nibras-blue { color: var(--nibras-blue); }
+.text-nibras-gold { color: var(--nibras-gold); }
+.bg-nibras-blue { background-color: var(--nibras-blue); }
+.bg-nibras-gold { background-color: var(--nibras-gold); }
+.border-nibras-gold { border-color: var(--nibras-gold); }
+.focus\:ring-nibras-blue:focus { --tw-ring-color: var(--nibras-blue); }
+.focus\:border-nibras-blue:focus { border-color: var(--nibras-blue); }
+.hover\:text-nibras-gold:hover { color: var(--nibras-gold); }
+.hover\:bg-nibras-gold:hover { background-color: var(--nibras-gold); }
+.bg-nibras-blue\/70 { background-color: rgba(10, 42, 67, 0.7); }
+.bg-nibras-blue\/80 { background-color: rgba(10, 42, 67, 0.8); }
+
+/* --- UX Polish: Transitions & Hovers --- */
+.transition-smooth {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
+.card-hover-effect {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+.card-hover-effect:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+/* --- Animation --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+
+
+/* --- Component Consistency --- */
+
+/* Modal */
+.modal-backdrop { background-color: rgba(0, 0, 0, 0.5); transition: opacity 0.3s ease-out;}
+.modal.hidden .modal-content { opacity: 0; transform: translateY(-20px) scale(0.95); }
+.modal.hidden .modal-backdrop { opacity: 0; }
+.modal-content { transition: transform 0.3s ease-out, opacity 0.3s ease-out; }
+
+/* Profile Tabs */
+.tab-button.active {
+    border-color: var(--nibras-blue);
+    color: var(--nibras-blue);
+}
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.5s ease-out forwards; }
+
+/* Chat List */
+.chat-list-item.active {
+    background-color: #edf2f7; /* Tailwind's gray-200 */
+    border-right-width: 4px;
+    border-color: var(--nibras-blue);
+    padding-right: calc(1rem - 4px); /* Adjust padding to keep content aligned */
+}
+.chat-list-item:not(.active):hover {
+    background-color: #f7fafc; /* Tailwind's gray-100 */
+}
+
+
+/* --- Responsive Overrides --- */
+@media (max-width: 768px) {
+    /* Responsive header for dashboard pages */
+    .dashboard-header {
+        flex-wrap: wrap;
+        row-gap: 0.75rem;
+    }
+    .dashboard-header-brand {
+        flex-grow: 1;
+    }
+    .dashboard-header-search {
+        order: 3; /* Move to the bottom */
+        width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        max-width: none !important;
+    }
+    .dashboard-header-actions {
+        flex-shrink: 0;
+    }
+}
+/*
+ * ----------------------------------------
+ * تعريف حركة الشعار (الطفو)
+ * ----------------------------------------
+ */
+.animated-logo {
+  animation: float 4s ease-in-out infinite;
+  animation-delay: 0s !important; /* لإجبار الحركة على البدء فوراً */
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/*
+ * ----------------------------------------
+ * تعريف حركة النص (الشريط الإخباري)
+ * ----------------------------------------
+ */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee-rtl 20s linear infinite;
+  animation-delay: 0s !important; /* لإجبار الحركة على البدء فوراً */
+}
+
+@keyframes marquee-rtl {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@-webkit-keyframes marquee-rtl {
+  0%   { -webkit-transform: translateX(-100%); }
+  100% { -webkit-transform: translateX(100%); }
+}
+
+
+
